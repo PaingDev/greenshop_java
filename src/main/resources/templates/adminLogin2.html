@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.forgetPwd{
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+}
+.btnSubmit
+{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form .btnSubmit{
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}
+.login-form{
+    padding: 5%;
+    
+}
+.login-form{
+    text-align: center;
+    color: #333;
+}
+
+.login-container{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    
+}
+.error{
+	color: red;
+	font-weight: 600;
+	display: block;
+	text-align: left;
+	padding-left: 3px;
+}
+
+</style>
+</head>
+<body id="app">
+	<div class="container login-container">
+		<div class="row justify-content-md-center">
+			<div class="col-md-5">
+				<form class="login-form border rounded" method="post" th:action="@{/admin/login}" th:object="${login}">
+					<h3>Login Form</h3>
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="User Name *" th:field="*{userName}"
+							 />
+						<span class="error" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Incorrect date</span>
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" th:field="*{password}"
+							placeholder="Your Password *" />
+						<span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect date</span>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btnSubmit" value="Login" />
+					</div>
+					<div class="form-group">
+						<a href="#" class="forgetPwd">Forget Password?</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

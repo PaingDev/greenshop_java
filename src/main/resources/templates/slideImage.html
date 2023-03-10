@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+		<div class="row mt-2">
+			<div class="col-4">
+			<h5>Slide Image <a href="/admin/slideImage/create"
+					class="btn  btn-outline-info mb-2"><i class="fa fa-plus" aria-hidden="true"></i> Create Slide Image</a></h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6" th:each="slideImage : ${listSlideImage}">
+				<div class="card-body">
+					<form method="post" enctype="multipart/form-data"
+						th:object="${slideImage}"
+						th:action="@{/admin/slideImage/{id}/edit(id=${slideImage.slideImageId})}">
+						<div class="row">
+							<div class="col-12">
+								<img alt="SlideImage"
+									th:src="@{/items/{img}(img=${slideImage.img})}"
+									class="img-fluid">
+							</div>
+							<div class="col-8">
+							<div class="input-group my-3">
+								<div class="custom-file">
+									<input class="custom-file-input" type="file" id="imagePart"
+										name="imagePart" accept="image/x-png,image/jpeg" /> <label
+										class="custom-file-label" for="imagePart">Choose Image Size (1200*628)</label>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary" value="update" name="action">Update</button>
+							<button type="submit" class="btn btn-danger" value="delete" name="action">Delete</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

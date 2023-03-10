@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<style type="text/css">
+.card-highlight {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 0.5rem !important;
+}
+
+.card-highlight h5, .card-highlight h6 {
+	opacity: 0.8;
+	color: black;
+	background: #F6F6F6;
+	padding: 2px;
+}
+
+form {
+	padding-top: 0.7em;
+	margin-top: 0em;
+}
+
+.close {
+	font-size: 1rem;
+}
+</style>
+</head>
+<body>
+	<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+	<h3>Group And Category</h3>
+		<div class="row">
+			<div class="col-12 col-md-4 mt-2">
+					<!-- <form method="post" th:action="@{/admin/groupAndCategory}">
+								<input type="hidden" name="categoryId"
+									th:value="${category.categoryId}" /> <input type="hidden"
+									name="groupCategoryId"
+									th:value="${groupCategory.groupCategoryId}" />
+								<button type="submit" class="btn btn-sm">
+									<i class="fa fa-plus-circle text-primary" aria-hidden="true"></i>
+								</button>
+							</form> -->
+					<form method="post" th:action="@{/admin/groupAndCategory}"
+						th:object="${groupAndCategoryDto}">
+						<input type="hidden"
+									th:field="*{groupCategoryId}" />
+									<label for="categoryId">Choose Category</label>
+						<select th:field="*{categoryId}" class="custom-select">
+							<option th:each="cat : ${listCategory}"
+								th:value="${cat.categoryId}"
+								th:text="${cat.categoryName +'/'+ cat.categoryNameMm}" />
+						</select>
+						<!-- <span class="error" th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}">Incorrect date</span>
+								 <input type="hidden"
+									th:field="*{groupCategoryId}" /> -->
+						<button type="submit" class="btn btn-md btn-outline-primary mt-4 btn-block">
+							<i class="fa fa-plus-circle"
+								aria-hidden="true"></i> Add to GroupCategory 
+						</button>
+					</form>
+				
+			</div>
+			<div class="col-12 col-md-7 offset-md-1 ">
+				<h3 >
+					<th:block th:text="${groupCategory.groupCategoryName + ' ' +groupCategory.groupCategoryNameMm}"></th:block>
+					<span th:text="${selectedCategoryList.size()}"
+						class="badge badge-danger"></span>
+				</h3>
+				<h3 th:text="${error}" class="text-danger"></h3>
+				<div class="row">
+					<form method="post" class="badge badge-pill badge-primary p-2 ml-2 mt-2"
+						th:each="selectedCategory : ${selectedCategoryList}"
+						th:action="@{/admin/groupAndCategory/delete}">
+						<span  th:text="${selectedCategory.categoryName + ' / ' +selectedCategory.categoryNameMm}"></span>
+						<input type="hidden" name="groupCategoryId"
+							th:value="${groupCategory.groupCategoryId}" /> <input
+							type="hidden" name="categoryId"
+							th:value="${selectedCategory.categoryId}" />
+						<button type="submit" class="close" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

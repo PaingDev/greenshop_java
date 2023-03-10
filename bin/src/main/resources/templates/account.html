@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"></link>
+<link rel="stylesheet" href="/css/main.css"></link>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+	<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 mt-2">
+				<table class="table table-hover table-striped table-bordered"
+					id="account">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>UserName</th>
+							<th>Email</th>
+							<th>FacebookId</th>
+							<th>PhoneNo</th>
+							<th>Status</th>
+							<th>UserRole</th>
+							<th>FirebaseId</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="account : ${listAccount}">	
+							<td th:text="${account.userAccountId}"></td>					
+							<td th:text="${account.userName}"></td>
+							<td th:text="${account.email}"></td>		
+							<td th:text="${account.facebookId}"></td>
+							<td th:text="${account.phoneNo}"></td>
+							<td th:text="${account.status}"></td>
+							<td th:text="${account.userRole}"></td>
+							<td th:text="${account.firebaseId}"></td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#account').DataTable();
+
+	});
+</script>
+</html>

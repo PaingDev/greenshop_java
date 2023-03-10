@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"></link>
+	<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/main.css"></link>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+
+
+<style type="text/css">
+.error {
+	color: red;
+	font-weight: 600;
+	display: block;
+	text-align: left;
+	padding-left: 3px;
+}
+.today {
+	background: #96C8FF;
+}
+
+.v-line {
+	border-right: 1px solid #F8F9FA;
+}
+</style>
+</head>
+<body>
+	<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 mt-2">
+					<h4 >Selling Item </th:block>
+				<span th:text="${listSaleItem.size()}" class="badge badge-danger"></span>
+				<a href="/admin/sellingItem/create"
+					class="btn  btn-outline-info mb-2"><i class="fa fa-plus" aria-hidden="true"></i> Create Selling Item</a>
+				</h4>
+					<div class="table-responsive">
+						<table class="table table-hover table-striped table-bordered" id="itemPrice">
+							<thead>
+								<tr>
+									<th>Item Id</th>
+									<th>Item Name</th>
+									<th>Unit Price</th>
+									<th>Unit</th>
+									<th>Modified Date</th>
+									<th>Price History</th>
+								</tr>
+							</thead>
+							<tbody>			
+									<tr th:each="saleItem : ${listSaleItem}" th:id="${'row' + saleItem.itemId}" th:classappend="${#dates.format(saleItem.date, 'dd-MM-yyyy') == #dates.format(#dates.createNow(),'dd-MM-yyyy')?'today':'none'}">
+										<td th:text="${saleItem.itemId}"></td>
+										<td th:text="${saleItem.itemName}"></td>
+										<td th:text="${saleItem.price}"></td>
+										<td th:text="${saleItem.unitName}"></td>
+										<td th:text="${#dates.format(saleItem.date, 'dd-MM-yyyy HH:mm')}"></td>
+										<td>
+											<a class="btn btn-sm" th:href="@{/admin/priceChart(itemId=${saleItem.itemId})}">
+												<i class="fa fa-history text-primary" aria-hidden="true"></i>
+											</a>
+										</td>
+									</tr>
+							</tbody>
+						</table>
+					</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#itemPrice').DataTable();
+	});
+</script>
+</html>

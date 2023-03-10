@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<style type="text/css">
+.error{
+	color: red;
+	font-weight: 600;
+	display: block;
+	text-align: left;
+	padding-left: 3px;
+}
+.v-line{
+	border-right: 1px solid #F8F9FA;
+	
+}
+</style>
+</head>
+<body>
+	<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-3 mt-2">
+				<div class="card-body">
+					<form th:if="${sellingPriceDto.priceId == 0}"
+						th:object="${sellingPriceDto}" method="post" 
+						th:action="@{/admin/sellingItem/create}" >
+						<h5 class="card-title">Create Selling Item</h5>
+						<p class="card-text">
+							
+							<input class="form-control" type="hidden" th:field="*{priceId}" />
+							<label for="itemId">Choose Item</label>
+							<select th:field="*{itemId}" class="custom-select">
+							<option th:each="item : ${listItem}" th:value="${item.itemId}" th:text="${item.itemName}"/>
+						</select>
+							<span class="error" th:if="${#fields.hasErrors('itemId')}" th:errors="*{itemId}">error item</span>
+						<div class="mb-3">
+						
+						<label for="unitId">Choose Unit</label>
+						<select th:field="*{unitId}" class="custom-select">
+							<option th:each="unit : ${listUnit}" th:value="${unit.unitId}" th:text="${unit.unitName}"/>
+						</select>
+						<span class="error" th:if="${#fields.hasErrors('unitId')}" th:errors="*{unitId}">Incorrect date</span>
+						
+						</div>
+						<div class="mb-3">
+							<label for="price">Price</label> <input
+								class="form-control" type="text" th:field="*{price}" />
+							<span class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price error</span>
+						</div>					
+						<button type="submit" class="btn btn-primary">Save</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	
+</script>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"></link>
+<link rel="stylesheet" href="/css/main.css"></link>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<style type="text/css">
+.img-small {
+	width: 50px;
+	height: 50px;
+}
+</style>
+</head>
+<body>
+	<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 mt-2">
+				<a href="/admin/item/create" class="btn  btn-outline-info mb-2"><i
+					class="fa fa-plus" aria-hidden="true"></i> Create Item</a> <a
+					href="/admin/category/create" class="btn btn-outline-primary mb-2"><i
+					class="fa fa-plus" aria-hidden="true"></i> Create Category</a>
+
+
+				<!-- <ul class="list-group" th:each="category : ${listCategory}">
+					<li class="list-group-item list-group-item-action"
+						th:onclick="|selectCategory('${category.categoryId}')|"><th:block
+							th:text="${category.categoryName +' / '+ category.categoryNameMm}"></th:block>
+						<div class="mt-2">
+							<form method="post"
+								th:action="@{/admin/category/{id}/delete(id=${category.categoryId})}">
+								<a class="btn btn-outline-primary btn-sm "
+									th:href="@{/admin/category/{id}/edit(id=${category.categoryId})}">
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit
+								</a>
+								<button class="btn btn-outline-danger btn-sm" type="submit">
+									<i class="fa fa-trash " aria-hidden="true"></i>Delete
+								</button>
+							</form>
+						</div></li>
+				</ul> -->
+			</div>
+			<div class="col-12">
+				<table class="table table-hover table-striped table-bordered"
+					id="category">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>CategoryName</th>
+							<th>CategoryNameMM</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="category : ${listCategory}"
+							>
+							<td th:text="${category.categoryId}"></td>
+							<td th:text="${category.categoryName}"></td>
+							<td th:text="${category.categoryNameMm}"></td>
+							<td>
+								<form method="post"
+									th:action="@{/admin/category/{id}/delete(id=${category.categoryId})}">
+									<a class="btn btn-outline-primary btn-sm "
+										th:href="@{/admin/category/{id}/edit(id=${category.categoryId})}">
+										<i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit
+									</a>
+									<button class="btn btn-outline-danger btn-sm" type="submit">
+										<i class="fa fa-trash " aria-hidden="true"></i>Delete
+									</button>
+									
+									
+								</form>
+								<button class="btn btn-outline-info btn-sm" th:onclick="|selectUnlistCategory('${category.categoryId}')|">
+										<i class="fa fa-list-alt " aria-hidden="true"></i>Unlisted Price
+									</button>
+								<button class="btn btn-outline-success btn-sm" th:onclick="|selectCategory('${category.categoryId}')|">
+										<i class="fa fa-list-alt " aria-hidden="true"></i>Listed
+								</button>	
+										
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-12 mt-md-2 mt-5">
+				<!-- <h4>
+					<th:block th:text="${categoryName}"></th:block>
+					<span th:text="${listItem.size()}" class="badge badge-danger"></span>
+				</h4> -->
+
+				<!-- <div class="row">
+					<div class="col-12">
+						<table class="table table-hover table-striped table-bordered"
+							id="item">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Item</th>
+									<th>Item Mm</th>
+									<th>Category</th>
+									<th>Category Mm</th>
+									<th>Image</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="item : ${listItem}">
+									<td th:text="${item.item.itemId}"></td>
+									<td th:text="${item.item.itemName}"></td>
+									<td th:text="${item.item.itemNameMm}"></td>
+									<td th:text="${item.item.category.categoryName}"></td>
+									<td th:text="${item.item.category.categoryNameMm}"></td>
+
+									<td><a th:if="${item.selling}"
+										th:href="@{/admin/sellingItem/create(itemId=${item.item.itemId},unitId=${item.unitId})}"
+										class="badge badge-primary">Selling</a> 
+										 <a th:if="${item.selling}"
+												th:href="@{/admin/sellingItem/remove(itemId=${item.item.itemId},unitId=${item.unitId})}"
+												class="badge badge-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+												<a
+										th:unless="${item.selling}"
+										th:href="@{/admin/sellingItem/create(itemId=${item.item.itemId})}"
+										class="badge badge-danger">Idle +</a> <br /> <img
+										th:if="${item.item.frontImg == null}"
+										th:src="@{/items/no_image.jpg}" class="img-small" alt="...">
+										<img th:unless="${item.item.frontImg == null}"
+										th:src="@{/items/{img}(img=${item.item.frontImg})}"
+										th:alt="${item.item.itemName}" class="img-small">										
+										</td>
+										
+									<td>
+
+										<form method="post"
+											th:action="@{/admin/item/{id}/delete(id=${item.item.itemId})}">
+											<a class="btn btn-outline-primary btn-sm"
+												th:href="@{/admin/item/{id}/edit(id=${item.item.itemId})}">
+												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit
+											</a>
+											<button class="btn btn-outline-danger btn-sm">
+												<i class="fa fa-trash" aria-hidden="true"></i>Delete
+											</button>
+											<a class="btn btn-outline-primary btn-sm"
+												th:if="${item.item.status}==ACTIVE"
+												th:href="@{/admin/item/{id}(id=${item.item.itemId},hide=true)}">
+												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>Hide
+											</a> <a th:unless="${item.item.status}==ACTIVE"
+												class="btn btn-outline-primary btn-sm"
+												th:href="@{/admin/item/{id}(id=${item.item.itemId},hide=false)}">
+												<i class="fa fa-pencil-square-o" aria-hidden="true"></i>Show
+											</a>
+										</form>
+									</td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+				</div> -->
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	function selectCategory(id) {
+		window.location = "/admin/category/"+id+"/item";
+	}
+	function selectUnlistCategory(id) {
+		window.location = "/admin/category/"+id+"/item/unlisted";
+	}
+	$(document).ready(function() {
+		$('#category').DataTable();
+		$('#item').DataTable();
+	});
+</script>
+</html>

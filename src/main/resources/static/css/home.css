@@ -1,0 +1,17 @@
+.status:hover {
+	cursor:pointer; 
+}
+
+.table {
+	font-size: 0.7rem;
+}
+.table td.fit, 
+.table th.fit {
+    white-space: nowrap;
+    width: 1%;
+}
+ol > li{
+	font-size: 1rem !important;
+	
+}
+

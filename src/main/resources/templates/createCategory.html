@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<style type="text/css">
+.card-highlight {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 0.5rem !important;
+}
+
+.card-highlight h5, .card-highlight h6 {
+	opacity: 0.8;
+	color: black;
+	background: #F6F6F6;
+	padding: 2px;
+}
+</style>
+</head>
+<body>
+	<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-3 mt-2">
+				<div class="card-body">
+					<form th:if="${categoryDto.categoryId == 0}" th:object="${categoryDto}" method="post" th:action="@{/admin/category/create}" enctype="multipart/form-data">
+						<h5 class="card-title">Create Category</h5>
+						<p class="card-text">
+							<input class="form-control" type="hidden" th:field="*{categoryId}"/>
+							<label for="categoryName">Category Name</label>
+							<input class="form-control" type="text" th:field="*{categoryName}"/>
+							<label for="categoryName">Category Name MM</label>
+							<input class="form-control" type="text" th:field="*{categoryNameMm}"/>
+							
+							<label for="specialId">Special Id</label>
+							<input class="form-control" type="number" th:field="*{specialId}"/>
+						</p>
+						<div class="input-group mb-3">
+							<div class="custom-file">
+								<input class="custom-file-input" th:field="*{imagePart}" type="file"
+									accept="image/x-png,image/jpeg" /> <label
+									class="custom-file-label" for="imagePart">Choose Category
+									Image</label>
+							</div>
+						</div>
+						<button  type="submit" class="btn btn-primary">Save</button>
+					</form>
+					<form th:unless="${categoryDto.categoryId == 0}" th:object="${categoryDto}" method="post" th:action="@{/admin/category/{id}/edit(id=${categoryDto.categoryId})}" enctype="multipart/form-data">
+						<h5 class="card-title">Edit Category</h5>
+						<p class="card-text">
+							<input class="form-control" type="hidden" th:field="*{categoryId}"/>
+							<label for="categoryName">Category Name</label>
+							<input class="form-control" type="text" th:field="*{categoryName}"/>
+							<label for="categoryName">Category Name MM</label>
+							<input class="form-control" type="text" th:field="*{categoryNameMm}"/>
+							
+							<label for="specialId">Special Id</label>
+							<input class="form-control" type="number" th:field="*{specialId}"/>
+						</p>
+						<div class="input-group mb-3">
+							
+							<div class="custom-file">
+								<input class="custom-file-input" th:field="*{imagePart}" type="file"
+									accept="image/x-png,image/jpeg" /> <label
+									class="custom-file-label" for="imagePart">Choose Category
+									Image</label>
+							</div>
+						</div>
+						<button  type="submit" class="btn btn-primary">Update</button>
+					</form>
+				</div>
+			</div>
+			<div class="col-3" th:if="${categoryDto?.img} != null">
+				<h5>Category Image</h5>
+				<img th:src="@{/items/{img}(img=${categoryDto.img})}" class="img-fluid"/>				
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	
+</script>
+</html>

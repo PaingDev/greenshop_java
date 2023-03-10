@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light"
+		th:fragment="nav">
+		<a class="navbar-brand" href="#">Fresh Myanmar</a>
+		
+			<button class="navbar-toggler p-0 border-0" type="button"
+				data-toggle="collapse" data-target="navHome">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		
+		<div class="collapse navbar-collapse" id="navHome">
+			<ul class="navbar-nav ">
+				<li th:class="nav-item "
+					th:classappend="${'home'== selectedMenu} ? active : none"><a
+					class="nav-link" href="/admin/home">View Order <span
+						class="sr-only">(current)</span></a></li>
+				<li class="nav-item"
+					th:classappend="${'category'== selectedMenu} ? active : none">
+					<a class="nav-link" href="/admin/category">Category</a>
+				</li>
+				<li class="nav-item"
+					th:classappend="${'unit'== selectedMenu} ? active : none"><a
+					class="nav-link" href="/admin/unit">Unit</a></li>
+				<li class="nav-item"
+					th:classappend="${'itemAndPrice'== selectedMenu} ? active : none">
+					<a class="nav-link" href="/admin/itemlist">Item & Price</a>
+				</li>
+				<li class="nav-item"
+					th:classappend="${'groupCategory'== selectedMenu} ? active : none">
+					<a class="nav-link" href="/admin/groupCategory">GroupCategory</a>
+				</li>
+				<li class="nav-item"
+					th:classappend="${'township'== selectedMenu} ? active : none">
+					<a class="nav-link" href="/admin/township">Township & DeliveryCharge</a>
+				</li>
+				<li class="nav-item"
+					th:classappend="${'slideImage'== selectedMenu} ? active : none">
+					<a class="nav-link" href="/admin/slideImage">Slide Image</a>
+				</li>
+				<li class="nav-item"
+					th:classappend="${'account'== selectedMenu} ? active : none">
+					<a class="nav-link" href="/admin/account">User Account</a>
+				</li>
+
+			</ul>
+			
+		</div>
+<span class="navbar-text ">
+				<a class="nav-link" href="/logout">Logout</a>
+			</span>
+	</nav>
+
+</body>
+</html>

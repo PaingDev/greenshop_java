@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<style type="text/css">
+.card-highlight {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 0.5rem !important;
+}
+
+.card-highlight h5, .card-highlight h6 {
+	opacity: 0.8;
+	color: black;
+	background: #F6F6F6;
+	padding: 2px;
+}
+</style>
+</head>
+<body>
+	<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 col-md-3 mt-2">
+				<div class="card-body">
+					<form th:if="${unitDto.unitId == 0}" th:object="${unitDto}" method="post" th:action="@{/admin/unit/create}">
+						<h5 class="card-title">Create Unit</h5>
+						<p class="card-text">
+							<input class="form-control" type="hidden" th:field="*{unitId}"/>
+							<label for="unitName">Unit Name</label>
+							<input class="form-control" type="text" th:field="*{unitName}"/>
+							<label for="unitName">Unit Name MM</label>
+							<input class="form-control" type="text" th:field="*{unitNameMm}"/>
+						</p>
+						<button  type="submit" class="btn btn-primary">Save</button>
+					</form>
+					<form th:unless="${unitDto.unitId == 0}" th:object="${unitDto}" method="post" th:action="@{/admin/unit/{id}/edit(id=${unitDto.unitId})}">
+						<h5 class="card-title">Edit Unit</h5>
+						<p class="card-text">
+							<input class="form-control" type="hidden" th:field="*{unitId}"/>
+							<label for="unitName">Unit Name</label>
+							<input class="form-control" type="text" th:field="*{unitName}"/>
+							<label for="unitName">Unit Name MM</label>
+							<input class="form-control" type="text" th:field="*{unitNameMm}"/>
+						</p>
+						<button  type="submit" class="btn btn-primary">Update</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	
+</script>
+</html>

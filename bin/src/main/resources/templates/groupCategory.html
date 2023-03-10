@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"></link>
+<link rel="stylesheet" href="/css/main.css"></link>
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+<style type="text/css">
+.card-highlight {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 0.5rem !important;
+}
+
+.card-highlight h5, .card-highlight h6 {
+	opacity: 0.8;
+	color: black;
+	background: #F6F6F6;
+	padding: 2px;
+}
+</style>
+</head>
+<body>
+	<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 col-md-3 mt-2">
+				<a href="/admin/groupCategory/create"
+					class="btn btn-block btn-outline-info mb-2"><i
+					class="fa fa-plus" aria-hidden="true"></i> Create Group Category </a>
+
+				<!--  <ul class="list-group" th:each="groupCategory : ${listGroupCategory}">
+					<li class="list-group-item list-group-item-action"
+						><th:block
+							th:text="${groupCategory.groupCategoryName}"></th:block> 
+							<th:block 
+							 th:text="${groupCategory.groupCategoryNameMm}"></th:block>
+						<div class="mt-2">
+							<form method="post"
+								th:action="@{/admin/groupCategory/{id}/delete(id=${groupCategory.groupCategoryId})}">
+								<a class="btn btn-outline-primary btn-sm "
+									th:href="@{/admin/groupCategory/{id}/edit(id=${groupCategory.groupCategoryId})}">
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit
+								</a>
+								<button class="btn btn-outline-danger btn-sm" type="submit">
+									<i class="fa fa-trash " aria-hidden="true"></i>Delete
+								</button>
+								<a class="btn btn-outline-primary btn-sm "
+									th:href="@{/admin/groupAndCategory(groupCategoryId=${groupCategory.groupCategoryId})}">
+									<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>Show
+									
+								</a>
+							</form>
+						</div></li>
+				</ul> -->
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-12 ">	
+					<table class="table table-hover table-striped table-bordered "
+						id="groupCategory">
+						<thead>
+							<tr>
+								<th>GroupCategory Id</th>
+								<th>GroupCategoryName</th>
+								<th>GroupCategoryName MM</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+						<tr th:each="groupCategory : ${listGroupCategory}">
+							<td th:text="${groupCategory.groupCategoryId}"></td>
+							<td th:text="${groupCategory.groupCategoryName}"></td>
+							<td th:text="${groupCategory.groupCategoryNameMm}"></td>
+							
+							<td>
+							<form method="post"
+								th:action="@{/admin/groupCategory/{id}/delete(id=${groupCategory.groupCategoryId})}">
+								<a class="btn btn-outline-primary btn-sm "
+									th:href="@{/admin/groupCategory/{id}/edit(id=${groupCategory.groupCategoryId})}">
+									<i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit
+								</a>
+								<button class="btn btn-outline-danger btn-sm" type="submit">
+									<i class="fa fa-trash " aria-hidden="true"></i>Delete
+								</button>
+								<a class="btn btn-outline-primary btn-sm "
+									th:href="@{/admin/groupAndCategory(groupCategoryId=${groupCategory.groupCategoryId})}">
+									<i class="fa fa-arrow-circle-right" aria-hidden="true"></i>Show
+									
+								</a>
+							</form>
+							</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#groupCategory').DataTable();
+	});
+</script>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Online Shop</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"></link>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"></link>
+<link rel="stylesheet" href="/css/main.css"></link>	
+	
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<style type="text/css">
+</style>
+</head>
+<body>
+	<div th:replace="/fragment/index :: nav"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12 col-md-3 mt-2">
+				<a href="/admin/township/create"
+					class="btn btn-block btn-outline-info mb-2"><i
+					class="fa fa-plus" aria-hidden="true"></i> Create Township </a>
+			</div>
+		</div>
+		<div class="row ">
+			<div class="col-12 col-md-8">
+				<div class="table-responsive">
+					<table class="table table-hover table-striped table-bordered"
+						id="township">
+						<thead>
+							<tr>
+								<th>Township Id</th>
+								<th>Township Name</th>
+								<th>Township NameMM</th>
+								<th>Delivery Charges</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="township : ${listTownship}">
+								<td th:text="${township.townshipId}"></td>
+								<td th:text="${township.townshipName}"></td>
+								<td th:text="${township.townshipNameMm}"></td>
+								<td th:text="${'('+township.deliveryCharge}+' MMK)'"></td>
+								<td>
+									<form method="post"
+										th:action="@{/admin/township/{id}/delete(id=${township.townshipId})}">
+										<a class="btn btn-outline-primary btn-sm "
+											th:href="@{/admin/township/{id}/edit(id=${township.townshipId})}">
+											<i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit
+										</a>
+										<button class="btn btn-outline-danger btn-sm" type="submit">
+											<i class="fa fa-trash " aria-hidden="true"></i>Delete
+										</button>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#township').DataTable();		
+	});
+</script>
+</html>
