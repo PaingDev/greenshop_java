@@ -6,9 +6,11 @@ In this project uses spring boot, jpa and thymeleaf template and report for Jasp
 
 Notification system use firebase notification. 
 
-Support Multiple language 
-English
-Myanmar
+Support Multiple language(i18n)
+1. English
+2. Myanmar
+
+To check UI project => https://github.com/PaingDev/greenshop_vuejs 
 
 ScreenShot1
 ![ScreenShot1](sample1.png)
