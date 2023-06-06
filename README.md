@@ -11,5 +11,5 @@ English
 Myanmar
 
 
-![PWA Home](https://drive.google.com/file/d/1Wz7scmGnSgy2NCZ2Uh0FRmAfk2c49tM0/view?usp=sharing)
+![ScreenShot1](sample1.png)
 
